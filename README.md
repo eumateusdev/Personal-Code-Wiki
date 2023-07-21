@@ -13,7 +13,7 @@ Para cada linguagem esta wiki documenta as bibliotecas e funções que foram uti
 
 # índice
 
-# [👨‍💻 C++](#-c++-)
+# 👨‍💻 C++
 - [Sobre a linguagem](#sobre-a-linguagem)
 - [Bibliotecas](#bibliotecas)
   - [iostream](#iostream)
@@ -34,7 +34,7 @@ Para cada linguagem esta wiki documenta as bibliotecas e funções que foram uti
   - [exit](#exit)
 
 
-# [👨‍💻 C++](#-c++-)
+## 👨‍💻 C++
 ## Sobre a linguagem
 
 <p align="justify">
