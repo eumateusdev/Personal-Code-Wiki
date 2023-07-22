@@ -13,7 +13,7 @@ Para cada linguagem esta wiki documenta as bibliotecas e funções que foram uti
 
 # índice
 
-# 👨‍💻 C++
+# 👨‍💻 [C++](#-c-1)
 - [Sobre a linguagem](#sobre-a-linguagem)
 - [Bibliotecas](#bibliotecas)
   - [iostream](#iostream)
@@ -32,7 +32,9 @@ Para cada linguagem esta wiki documenta as bibliotecas e funções que foram uti
   - [srand](#srand)
   - [rand](#rand)
   - [exit](#exit)
-
+- [Organização](#organização)
+  - [Qual a real utilidade de arquivos de cabeçalho?](#qual-a-real-utilidade-de-arquivos-de-cabeçalho)
+  - [Como utilizar a mesma variável em múltiplos arquivos?](#como-utilizar-a-mesma-variável-em-múltiplos-arquivos)
 
 ## 👨‍💻 C++
 ## Sobre a linguagem
@@ -63,7 +65,7 @@ A linguagem de programação C++ é amplamente utilizada e possui diversas bibli
 
 - ### iostream
 
-A biblioteca iostream (input/output stream) é uma parte fundamental da linguagem C++, permitindo a interação com a entrada (teclado) e saída (tela) do programa. Com ela, você pode realizar operações de leitura e escrita em tempo de execução. Exemplo:
+A biblioteca iostream (input/output stream) é uma parte fundamental da linguagem C++, permitindo a interação com a entrada (teclado) e saída (tela) do programa. Com ela, pode-se realizar operações de leitura e escrita em tempo de execução. Exemplo:
 
 ```cpp
 #include <iostream>
@@ -356,5 +358,85 @@ int main() {
 
 </p>
 
+## Organização
+
+<p align="justify">
+Em projetos de programação em C++, é comum dividir o código em vários arquivos para melhor organização, modularidade e reutilização de código. Essa abordagem é conhecida como "separação de código em múltiplos arquivos" ou "organização em arquivos".
+
+Aqui está um exemplo de como organizar um projeto simples em C++ com três arquivos: main.cpp, funcoes.h e funcoes.cpp.
+
+- main.cpp: Este é o arquivo principal onde chamará as funções definidas nos outros arquivos.
+
+```cpp
+#include "funcoes.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 5, b = 10;
+    int resultado = somar(a, b);
+    cout << "A soma de " << a << " e " << b << " é: " << resultado << endl;
+    return 0;
+}
+```
+
+- funcoes.h: Este é o arquivo de cabeçalho (header file) que contém as declarações das funções que serão utilizadas em outros arquivos.
+
+```cpp
+int somar(int a, int b);
+```
+
+- funcoes.cpp: Este é o arquivo de implementação que contém o código das funções declaradas no arquivo funcoes.h.
+
+```cpp
+#include "funcoes.h"
+
+int somar(int a, int b) {
+    return a + b;
+}
+```
+
+### Qual a real utilidade de arquivos de cabeçalho?
+Os arquivos de cabeçalho (header files) em C++ têm uma utilidade essencial na organização do código e são usados para declarar interfaces das funções, classes e outras estruturas que serão utilizadas em outros arquivos-fonte (.cpp).
+
+Aqui estão algumas razões pelas quais os arquivos de cabeçalho são úteis:
+
+- Declaração de Interfaces: Os arquivos de cabeçalho contêm apenas as declarações das funções e classes, sem a implementação. Isso permite que outros arquivos saibam quais funções e classes estão disponíveis para uso, sem precisar conhecer os detalhes de como elas funcionam.
+
+- Evitar Redefinição: Quando é incluido um arquivo de cabeçalho em vários arquivos-fonte, o pré-processador do C++ garante que as definições sejam incluídas apenas uma vez em cada unidade de compilação, evitando assim erros de redefinição.
+
+- Reutilização de Código: Ao dividir o código em arquivos de cabeçalho e arquivos de implementação, pode-se reutilizar as mesmas declarações em diferentes partes do projeto, facilitando a manutenção e evitando a duplicação de código.
+
+### Como utilizar a mesma variável em múltiplos arquivos?
+
+Para utilizar a mesma variável em múltiplos arquivos, deve seguir as seguintes etapas:
+
+- Declaração da variável no arquivo de cabeçalho: Declare a variável no arquivo de cabeçalho para torná-la conhecida em todos os arquivos que incluem esse cabeçalho. Use a palavra-chave extern para indicar que a variável está sendo declarada, mas não definida nesse arquivo.
+
+```cpp
+extern int variavelGlobal;
+```
+- Definição da variável em um arquivo-fonte: Em um arquivo-fonte (.cpp) específico, defina a variável global que foi declarada no arquivo de cabeçalho.
+
+```cpp
+#include "arquivo_global.h"
+
+int variavelGlobal = 42;
+```
+
+- Inclusão do arquivo de cabeçalho em outros arquivos-fonte: Agora, é possivél usar a variável global em outros arquivos-fonte, incluindo o arquivo de cabeçalho onde a variável foi declarada.
+
+```cpp
+// outro_arquivo.cpp
+#include "arquivo_global.h"
+#include <iostream>
+
+int main() {
+    std::cout << "Valor da variável global: " << variavelGlobal << std::endl;
+    return 0;
+}
+```
+
+</p>
 
 
