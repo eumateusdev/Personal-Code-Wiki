@@ -439,4 +439,44 @@ int main() {
 
 </p>
 
+## Funções Inline
+
+<p align="justify">
+
+Em C++, funções inline são pequenas funções que são incorporadas diretamente no código onde são chamadas, em vez de serem executadas através de uma chamada de função convencional. A ideia é otimizar o desempenho evitando o overhead de empilhar e desempilhar valores da pilha de chamadas de função.
+
+Para declarar uma função inline em C++, pode-se usar a palavra-chave inline antes da definição da função. Normalmente, funções inline são colocadas no cabeçalho (arquivo .h) para que possam ser acessadas em diferentes arquivos de origem (arquivos .cpp).
+
+Exemplo de função inline em C++:
+
+```cpp
+// arquivo: funcoes_inline.h
+
+// Função inline para calcular o quadrado de um número
+inline int quadrado(int num) {
+    return num * num;
+}
+```
+
+```cpp
+// arquivo: main.cpp
+#include <iostream>
+#include "funcoes_inline.hpp" // Incluindo o cabeçalho com a função inline
+
+int main() {
+    int num = 5;
+
+    // Chamando a função inline para calcular o quadrado do número
+    int resultado = quadrado(num);
+
+    std::cout << "O quadrado de " << num << " é: " << resultado << std::endl;
+    return 0;
+}
+
+```
+
+No exemplo acima, a função quadrado foi declarada como inline no cabeçalho funcoes_inline.hpp e definida logo em seguida. Em seguida, no arquivo main.cpp, a função quadrado é chamada normalmente, como se fosse uma função regular, mas o compilador pode optar por substituir a chamada da função pelo próprio corpo da função, inlineando-a diretamente no código onde foi chamada.
+
+É importante notar que o compilador tem a liberdade de decidir se realmente irá tratar uma função como inline ou não. A palavra-chave inline é apenas uma sugestão ao compilador. Além disso, é recomendado usar funções inline apenas para funções pequenas e simples, pois funções mais complexas podem resultar em um código maior e, potencialmente, reduzir o desempenho em vez de melhorá-lo.
+</p>
 
